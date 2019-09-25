@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const Event = require('../../models/event');
 const User = require('../../models/user');
+const Company = require('../../models/company');
 
 const events = async eventIds => {
   try {
@@ -11,13 +12,26 @@ const events = async eventIds => {
         ...event._doc,
         _id: event.id,
         date: new Date(event._doc.date).toISOString(),
-        creator: user.bind(this, event.creator)
+        creator: user.bind(this, event.creator),
+        atendees:  company.bind(this, event.atendees)
       };
     });
     return events;
   } catch (err) {
     throw err;
   }
+};
+
+const company = async companyIds => {
+    try{
+        const company = await Company.findById(companyId);
+        return {
+          ...company._doc,
+          _id: company.id
+        };
+    } catch (err) {
+        throw err;
+    }
 };
 
 const user = async userId => {
@@ -84,6 +98,25 @@ module.exports = {
           throw err;
         }
       },
+
+      createCompany: async args => {
+        try {
+          const existingCompany = await Company.findOne({ title: args.companyInput.title});
+          if(existingCompany) {
+              throw new Error('company is already listed');
+          }
+          const company = new Company({
+            title: args.companyInput.title,
+            description: args.companyInput.description
+          });
+          const result = await company.save();
+
+          return {...result._doc, title:result.title, description: result.description};
+        } catch(err) {
+            throw err;
+        }
+      },
+
       createUser: async args => {
           try {
               const existingUser = await User.findOne({ email: args.userInput.email});

@@ -8,7 +8,7 @@ module.exports = buildSchema(`
         price: Float!
         date: String!
         creator: User!
-        atendees: [Atendee!]
+        atendees: [Company!]
     }
 
     type Company {
@@ -44,12 +44,13 @@ module.exports = buildSchema(`
 
     type RootQuery {
         events: [Event!]!
+        company: [Company!]
     }
 
     type RootMutation {
         createEvent(eventInput: EventInput): Event
         createUser(userInput: UserInput): User
-        createCompany(compayInput: companyInput): Company
+        createCompany(companyInput: CompanyInput): Company
     }
 
     schema {
