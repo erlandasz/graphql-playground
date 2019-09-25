@@ -13,25 +13,12 @@ const events = async eventIds => {
         _id: event.id,
         date: new Date(event._doc.date).toISOString(),
         creator: user.bind(this, event.creator),
-        atendees:  company.bind(this, event.atendees)
       };
     });
     return events;
   } catch (err) {
     throw err;
   }
-};
-
-const company = async companyIds => {
-    try{
-        const company = await Company.findById(companyId);
-        return {
-          ...company._doc,
-          _id: company.id
-        };
-    } catch (err) {
-        throw err;
-    }
 };
 
 const user = async userId => {
@@ -50,21 +37,19 @@ const user = async userId => {
 
 module.exports = {
   events: async () => {
-      try {
-          const events = async eventIds => {
-            return await Event
-            .find({
-              _id: {
-                $in:eventIds}})
-                .select(`
-                date
-                creator`)
-                .populate('creator')
-                .lean();
-        }
-      } catch(err) {
-        throw err;
-      }
+    try {
+      const events = await Event.find();
+      return events.map(event => {
+        return {
+          ...event._doc,
+          _id: event.id,
+          date: new Date(event._doc.date).toISOString(),
+          creator: user.bind(this, event._doc.creator)
+        };
+      });
+    } catch (err) {
+      throw err;
+    }
   },
 
     createEvent: async args => {
