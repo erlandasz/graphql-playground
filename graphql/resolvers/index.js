@@ -21,18 +21,6 @@ const events = async eventIds => {
   }
 };
 
-const company = async companyId => {
-  try {
-    const company = await Company.findById(companyId);
-    return {
-      ...company._doc,
-      _id: company.id
-    };
-  } catch (err) {
-    throw err;
-  }
-};
-
 const user = async userId => {
     try {
         const user = await User.findById(userId);
@@ -71,8 +59,7 @@ module.exports = {
         return {
           ...company._doc,
           _id: company.id,
-          title: company.title,
-          attendingEvents: events.bind(this, company._doc.attendingEvents)
+          title: company.title
         };
       });
     } catch (err) {
@@ -107,7 +94,6 @@ module.exports = {
     
           return createdEvent;
         } catch (err) {
-          console.log(err);
           throw err;
         }
       },
@@ -121,8 +107,9 @@ module.exports = {
           const company = new Company({
             title: args.companyInput.title,
             description: args.companyInput.description,
-            attendingEvents: '5d8b5266d6e60f2c9c8361c0'
           });
+          
+
           const result = await company.save();
 
           return {...result._doc, title:result.title, description: result.description};
