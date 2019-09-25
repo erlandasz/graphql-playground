@@ -29,6 +29,10 @@ module.exports = buildSchema(`
         password: String!
     }
 
+    type RootQuery {
+        events: [Event!]!
+    }
+
     type RootMutation {
         createEvent(eventInput: EventInput): Event
         createUser(userInput: UserInput): User

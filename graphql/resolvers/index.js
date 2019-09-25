@@ -26,6 +26,7 @@ const user = async userId => {
         return {
             ...user._doc,
             _id: user.id,
+            password: null,
             createdEvents: events.bind(this, user._doc.createdEvents)
         };
     } catch (err) {
@@ -56,7 +57,7 @@ module.exports = {
           description: args.eventInput.description,
           price: +args.eventInput.price,
           date: new Date(args.eventInput.date),
-          creator: '5d8a0069768a27342465a81f'
+          creator: '5d8b1d70ae13a821f849e4c2'
         });
         let createdEvent;
         try {
@@ -67,7 +68,7 @@ module.exports = {
             date: new Date(event._doc.date).toISOString(),
             creator: user.bind(this, result._doc.creator)
           };
-          const creator = await User.findById('5d8a0069768a27342465a81f');
+          const creator = await User.findById('5d8b1d70ae13a821f849e4c2');
     
           if (!creator) {
             throw new Error('User not found.');
