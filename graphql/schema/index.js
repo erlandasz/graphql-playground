@@ -8,6 +8,14 @@ module.exports = buildSchema(`
         price: Float!
         date: String!
         creator: User!
+        atendees: [Atendee!]
+    }
+
+    type Company {
+        _id: ID!
+        title: String!
+        description: String!
+        
     }
 
     type User {
@@ -24,6 +32,11 @@ module.exports = buildSchema(`
         date: String!
     }
 
+    input CompanyInput {
+        title: String!
+        description: String!
+    }
+
     input UserInput {
         email: String!
         password: String!
@@ -36,6 +49,7 @@ module.exports = buildSchema(`
     type RootMutation {
         createEvent(eventInput: EventInput): Event
         createUser(userInput: UserInput): User
+        createCompany(compayInput: companyInput): Company
     }
 
     schema {

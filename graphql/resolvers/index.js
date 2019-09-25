@@ -35,21 +35,23 @@ const user = async userId => {
 };
 
 module.exports = {
-    events: async () => {
-        try {
-            const events = await Event.find();
-            return events.map(event => {
-                return {
-                    ...event._doc,
-                    _id: event.id,
-                    date: new Date(event._doc.date).toISOString(),
-                    creator: user.bind(this, event._doc.creator)
-                };
-            });
-        } catch (err) {
-            throw err;
+  events: async () => {
+      try {
+          const events = async eventIds => {
+            return await Event
+            .find({
+              _id: {
+                $in:eventIds}})
+                .select(`
+                date
+                creator`)
+                .populate('creator')
+                .lean();
         }
-    },
+      } catch(err) {
+        throw err;
+      }
+  },
 
     createEvent: async args => {
         const event = new Event({
