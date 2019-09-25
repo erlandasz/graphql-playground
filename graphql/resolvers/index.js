@@ -21,6 +21,18 @@ const events = async eventIds => {
   }
 };
 
+const company = async companyId => {
+  try {
+    const company = await Company.findById(companyId);
+    return {
+      ...company._doc,
+      _id: company.id
+    };
+  } catch (err) {
+    throw err;
+  }
+};
+
 const user = async userId => {
     try {
         const user = await User.findById(userId);
@@ -45,6 +57,21 @@ module.exports = {
           _id: event.id,
           date: new Date(event._doc.date).toISOString(),
           creator: user.bind(this, event._doc.creator)
+        };
+      });
+    } catch (err) {
+      throw err;
+    }
+  },
+
+  company: async () => {
+    try {
+      const companies = await Company.find();
+      return companies.map(company => {
+        return {
+          ...company._doc,
+          _id: company.id,
+          title: company.title
         };
       });
     } catch (err) {
