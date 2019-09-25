@@ -15,6 +15,7 @@ module.exports = buildSchema(`
         _id: ID!
         title: String!
         description: String!
+        attendingEvents: [Event!]
         
     }
 

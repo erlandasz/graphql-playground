@@ -71,7 +71,8 @@ module.exports = {
         return {
           ...company._doc,
           _id: company.id,
-          title: company.title
+          title: company.title,
+          attendingEvents: events.bind(this, company._doc.attendingEvents)
         };
       });
     } catch (err) {
@@ -119,7 +120,8 @@ module.exports = {
           }
           const company = new Company({
             title: args.companyInput.title,
-            description: args.companyInput.description
+            description: args.companyInput.description,
+            attendingEvents: '5d8b5266d6e60f2c9c8361c0'
           });
           const result = await company.save();
 

@@ -11,6 +11,12 @@ const companySchema = new Schema({
     type: String,
     required: true
     },
+    attendingEvents: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Event'
+        }
+    ]
 });
 
 
