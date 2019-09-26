@@ -22,7 +22,6 @@ module.exports = buildSchema(`
         _id: ID!
         email: String!
         password: String
-        createdEvents: [Event!]
     }
 
     input EventInput {

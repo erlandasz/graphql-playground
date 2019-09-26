@@ -4,7 +4,49 @@ const Event = require('../../models/event');
 const User = require('../../models/user');
 const Company = require('../../models/company');
 
+// const events = async eventIds => {
+//   try {
+//     const events = await Event.find({ _id: { $in: eventIds } });
+//     events.map(event => {
+//       return {
+//         ...event._doc,
+//         _id: event.id,
+//         date: new Date(event._doc.date).toISOString()
+//       };
+//     });
+//     return events;
+//   } catch (err) {
+//     throw err;
+//   }
+// };
 
+// const company = async companyId => {
+//   try {
+//     const company = await Company.findById(companyId);
+//     return {
+//       ...company._doc,
+//       _id: company.id,
+//       title: company.title,
+//       description: company.description
+//     };
+//   }catch (err){ 
+//     throw err;
+//   }
+// };
+
+const user = async userId => {
+    try {
+        const user = await User.findById(userId);
+        return {
+            ...user._doc,
+            _id: user.id,
+            password: null,
+            createdEvents: events.bind(this, user._doc.createdEvents)
+        };
+    } catch (err) {
+        throw err;
+    }
+};
 
 module.exports = {
   events: async () => {
@@ -49,7 +91,7 @@ module.exports = {
           description: args.eventInput.description,
           price: +args.eventInput.price,
           date: new Date(args.eventInput.date),
-          creator: '5d8c82e8ab4ce41830470128'
+          creator: '5d8c8bdf23b6360374911359'
         });
         let createdEvent;
         try {
@@ -60,12 +102,11 @@ module.exports = {
             date: new Date(event._doc.date).toISOString(),
             creator: user.bind(this, result._doc.creator)
           };
-          const creator = await User.findById('5d8c82e8ab4ce41830470128');
+          const creator = await User.findById('5d8c8bdf23b6360374911359');
     
           if (!creator) {
             throw new Error('User not found.');
           }
-          creator.createdEvents.push(event);
           await creator.save();
     
           return createdEvent;
@@ -91,7 +132,7 @@ module.exports = {
               ...result._doc,
               _id: result._doc._id.toString(),
             };
-            const atendee = await Event.findById('5d8c8392cd55e736fcefdf33');
+            const atendee = await Event.findById('5d8c8c365f226c2d18ab6f7a');
 
             if (!atendee) {
               throw new Error('event not found');
