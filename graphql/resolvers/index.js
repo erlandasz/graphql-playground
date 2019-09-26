@@ -4,35 +4,6 @@ const Event = require('../../models/event');
 const User = require('../../models/user');
 const Company = require('../../models/company');
 
-// const events = async eventIds => {
-//   try {
-//     const events = await Event.find({ _id: { $in: eventIds } });
-//     events.map(event => {
-//       return {
-//         ...event._doc,
-//         _id: event.id,
-//         date: new Date(event._doc.date).toISOString()
-//       };
-//     });
-//     return events;
-//   } catch (err) {
-//     throw err;
-//   }
-// };
-
-// const company = async companyId => {
-//   try {
-//     const company = await Company.findById(companyId);
-//     return {
-//       ...company._doc,
-//       _id: company.id,
-//       title: company.title,
-//       description: company.description
-//     };
-//   }catch (err){ 
-//     throw err;
-//   }
-// };
 
 const user = async userId => {
     try {
@@ -67,7 +38,7 @@ module.exports = {
       const companies = await Company.find()
       .select(`title description`)
       .lean();
-      return companies
+      return companies;
     } catch (err) {
       throw err;
     }
@@ -78,7 +49,7 @@ module.exports = {
       const users = await User.find()
       .select(`email createdEvents`)
       .populate(`createdEvents`)
-      .lean()
+      .lean();
       return users;
     } catch (err) {
       throw err;
