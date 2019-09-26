@@ -4,64 +4,40 @@ const Event = require('../../models/event');
 const User = require('../../models/user');
 const Company = require('../../models/company');
 
-const events = async eventIds => {
-  try {
-    const events = await Event.find({ _id: { $in: eventIds } });
-    events.map(event => {
-      return {
-        ...event._doc,
-        _id: event.id,
-        date: new Date(event._doc.date).toISOString(),
-        creator: user.bind(this, event.creator),
-      };
-    });
-    return events;
-  } catch (err) {
-    throw err;
-  }
-};
 
-const user = async userId => {
-    try {
-        const user = await User.findById(userId);
-        return {
-            ...user._doc,
-            _id: user.id,
-            password: null,
-            createdEvents: events.bind(this, user._doc.createdEvents)
-        };
-    } catch (err) {
-        throw err;
-    }
-};
 
 module.exports = {
   events: async () => {
     try {
-      const events = await Event.find();
-      return events.map(event => {
-        return {
-          ...event._doc,
-          _id: event.id,
-          date: new Date(event._doc.date).toISOString(),
-          creator: user.bind(this, event._doc.creator)
-        };
-      });
+      const events = await Event.find()
+      .select(`title description date creator atendees`)
+      .populate(`creator atendees`)
+      .lean();
+      return events;
+      } catch (err) {
+        throw err;
+      }
+    }, 
+  
+
+  company: async () => {
+    try {
+      const companies = await Company.find()
+      .select(`title description`)
+      .lean();
+      return companies
     } catch (err) {
       throw err;
     }
   },
 
-  company: async () => {
+  user: async () => {
     try {
-      const companies = await Company.find();
-      return companies.map(company => {
-        return {
-          ...company._doc,
-          _id: company.id,
-          title: company.title
-        };
-      });
+      const users = await User.find()
+      .select(`email createdEvents`)
+      .populate(`createdEvents`)
+      .lean()
+      return users;
     } catch (err) {
       throw err;
     }
@@ -73,7 +49,7 @@ module.exports = {
           description: args.eventInput.description,
           price: +args.eventInput.price,
           date: new Date(args.eventInput.date),
-          creator: '5d8b1d70ae13a821f849e4c2'
+          creator: '5d8c82e8ab4ce41830470128'
         });
         let createdEvent;
         try {
@@ -84,7 +60,7 @@ module.exports = {
             date: new Date(event._doc.date).toISOString(),
             creator: user.bind(this, result._doc.creator)
           };
-          const creator = await User.findById('5d8b1d70ae13a821f849e4c2');
+          const creator = await User.findById('5d8c82e8ab4ce41830470128');
     
           if (!creator) {
             throw new Error('User not found.');
@@ -108,11 +84,25 @@ module.exports = {
             title: args.companyInput.title,
             description: args.companyInput.description,
           });
+          let atendees;
+          try{
+            const result = await company.save();
+            atendees = {
+              ...result._doc,
+              _id: result._doc._id.toString(),
+            };
+            const atendee = await Event.findById('5d8c8392cd55e736fcefdf33');
+
+            if (!atendee) {
+              throw new Error('event not found');
+            }
+            atendee.atendees.push(company);
+            await atendee.save();
+            return atendees;
+          } catch(err) {
+            throw err;
+          }
           
-
-          const result = await company.save();
-
-          return {...result._doc, title:result.title, description: result.description};
         } catch(err) {
             throw err;
         }
