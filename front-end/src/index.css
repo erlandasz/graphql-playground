@@ -3,3 +3,21 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.events-control {
+  text-align: center;
+  padding: 1rem;
+  width: 30rem;
+  max-width: 80%;
+  margin: 2rem auto;
+}
+
+.create-event, .create-company {
+  border: 1px solid black;
+}
+
+
+.create-event-header, .create-company-header
+ {
+  text-align: center;
+  color: blue;
+}

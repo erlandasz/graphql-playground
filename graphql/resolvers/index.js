@@ -23,7 +23,7 @@ module.exports = {
   events: async () => {
     try {
       const events = await Event.find()
-      .select(`title description date creator atendees`)
+      .select(`title description date price creator atendees`)
       .populate(`creator atendees`)
       .lean();
       return events;

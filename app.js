@@ -22,7 +22,7 @@ app.use(
 
 mongoose.connect(`mongodb+srv://sachs-clone-web:1UnJebPm7GrRK767@cluster0-hk0hh.mongodb.net/sachs-playground?retryWrites=true&w=majority`)
     .then(() => {
-        app.listen(3000);
+        app.listen(8000);
     })
     .catch(err => {
         console.log(err);
