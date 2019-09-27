@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
 class ListPage extends Component {
+ 
 
-    render() {
-        return (
+
+    render () {
+        return(
             <React.Fragment>
-                <h1>list</h1> 
+                <h1>List</h1>
             </React.Fragment>
         )
     }
