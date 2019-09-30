@@ -1,0 +1,37 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'starter' ]
+2 info using npm@6.9.0
+3 info using node@v10.16.3
+4 verbose run-script [ 'prestarter', 'starter', 'poststarter' ]
+5 info lifecycle react-try@1.0.0~prestarter: react-try@1.0.0
+6 info lifecycle react-try@1.0.0~starter: react-try@1.0.0
+7 verbose lifecycle react-try@1.0.0~starter: unsafe-perm in lifecycle true
+8 verbose lifecycle react-try@1.0.0~starter: PATH: C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;C:\Users\IT admin\Documents\apps\graphql-playground\node_modules\.bin;C:\Users\IT admin\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\IT admin\bin;C:\Program Files (x86)\Lenovo\FusionEngine;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Program Files (x86)\Brackets\command;C:\Users\IT admin\AppData\Local\Microsoft\WindowsApps;C:\Users\IT admin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\IT admin\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+9 verbose lifecycle react-try@1.0.0~starter: CWD: C:\Users\IT admin\Documents\apps\graphql-playground
+10 silly lifecycle react-try@1.0.0~starter: Args: [ '/d /s /c', 'node app.js' ]
+11 silly lifecycle react-try@1.0.0~starter: Returned: code: 3221225786  signal: null
+12 info lifecycle react-try@1.0.0~starter: Failed to exec starter script
+13 verbose stack Error: react-try@1.0.0 starter: `node app.js`
+13 verbose stack Exit status 3221225786
+13 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\index.js:301:16)
+13 verbose stack     at EventEmitter.emit (events.js:198:13)
+13 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\lib\spawn.js:55:14)
+13 verbose stack     at ChildProcess.emit (events.js:198:13)
+13 verbose stack     at maybeClose (internal/child_process.js:982:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)
+14 verbose pkgid react-try@1.0.0
+15 verbose cwd C:\Users\IT admin\Documents\apps\graphql-playground
+16 verbose Windows_NT 10.0.18362
+17 verbose argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "starter"
+18 verbose node v10.16.3
+19 verbose npm  v6.9.0
+20 error code ELIFECYCLE
+21 error errno 3221225786
+22 error react-try@1.0.0 starter: `node app.js`
+22 error Exit status 3221225786
+23 error Failed at the react-try@1.0.0 starter script.
+23 error This is probably not a problem with npm. There is likely additional logging output above.
+24 verbose exit [ 3221225786, true ]
